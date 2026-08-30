@@ -97,6 +97,8 @@
   }
   .row{ display:flex; align-items:center; gap:8px; }
   .row.wrap{ flex-wrap:wrap; }
+  .row.scrollx{ overflow-x:auto; flex-wrap:nowrap; scrollbar-width:none; padding-bottom:2px; }
+  .row.scrollx::-webkit-scrollbar{ display:none; }
 
   #colors{ display:flex; gap:7px; overflow-x:auto; flex:1; padding:2px; scrollbar-width:none;}
   #colors::-webkit-scrollbar{display:none;}
@@ -174,7 +176,7 @@
       <button class="iconbtn" id="saveBtn" title="Salvar desenho">💾</button>
     </div>
     <div class="row">
-      <div id="styleTabs" class="row" style="gap:6px;">
+      <div id="styleTabs" class="row scrollx" style="gap:6px;">
         <button class="tool-btn active" data-style="caneta">🖊️ Caneta</button>
         <button class="tool-btn" data-style="giz">🖍️ Giz de Cera</button>
         <button class="tool-btn" data-style="pincel">🖌️ Pincel</button>
@@ -596,6 +598,132 @@
       ctx.moveTo(cx-60,cy-70); ctx.lineTo(cx,cy+210); ctx.moveTo(cx+60,cy-70); ctx.lineTo(cx,cy+210);
       ctx.moveTo(cx,cy-160); ctx.lineTo(cx,cy-70); ctx.stroke();
     }},
+
+    urso: { name:'Ursinho', emoji:'🧸', theme:'fantasia', draw:(ctx,w,h)=>{
+      strokeSetup(ctx);
+      const cx=w/2, cy=h/2+40;
+      ctx.beginPath(); ctx.ellipse(cx, cy+90, 150, 130, 0, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(cx, cy+100, 70, 60, 0, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cy-90, 110, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx-95, cy-175, 45, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx+95, cy-175, 45, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx-95, cy-175, 18, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx+95, cy-175, 18, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(cx, cy-65, 50, 40, 0, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(cx, cy-85, 12, 9, 0, 0, Math.PI*2); ctx.fillStyle='#2a2a2a'; ctx.fill();
+      ctx.beginPath(); ctx.arc(cx-38, cy-100, 9, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx+38, cy-100, 9, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx,cy-76); ctx.quadraticCurveTo(cx-22,cy-50,cx-45,cy-58);
+      ctx.moveTo(cx,cy-76); ctx.quadraticCurveTo(cx+22,cy-50,cx+45,cy-58); ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(cx-15,cy+70); ctx.bezierCurveTo(cx-55,cy+40,cx-55,cy+100,cx-15,cy+110);
+      ctx.bezierCurveTo(cx,cy+120,cx,cy+80,cx-15,cy+70); ctx.closePath(); ctx.stroke();
+      [cx-150,cx+150].forEach(sx=>{ ctx.beginPath(); ctx.arc(sx, cy+40, 55, 0, Math.PI*2); ctx.stroke(); });
+      [cx-100,cx+100].forEach(lx=>{ ctx.beginPath(); ctx.ellipse(lx, cy+220, 45, 55, 0, 0, Math.PI*2); ctx.stroke(); });
+    }},
+
+    unicornio: { name:'Unicórnio', emoji:'🦄', theme:'fantasia', draw:(ctx,w,h)=>{
+      strokeSetup(ctx);
+      const cx=w/2, cy=h/2+50;
+      ctx.beginPath();
+      ctx.ellipse(cx+20, cy+50, 160, 105, -0.05, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(cx-140, cy-40);
+      ctx.bezierCurveTo(cx-190, cy-110, cx-160, cy-190, cx-100, cy-210);
+      ctx.bezierCurveTo(cx-70, cy-160, cx-60, cy-120, cx-70, cy-70);
+      ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-100,cy-210); ctx.lineTo(cx-120,cy-270); ctx.lineTo(cx-80,cy-215); ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx-125, cy-100, 9, 0, Math.PI*2); ctx.stroke();
+      for(let i=0;i<5;i++){
+        ctx.beginPath();
+        const a=i*0.22;
+        ctx.moveTo(cx-95-i*8, cy-190+i*18);
+        ctx.quadraticCurveTo(cx-190+i*10, cy-150+i*25, cx-150+i*12, cy-70+i*20);
+        ctx.stroke();
+      }
+      ctx.beginPath();
+      ctx.moveTo(cx+165,cy+0);
+      ctx.bezierCurveTo(cx+250,cy-30,cx+260,cy+60,cx+210,cy+90);
+      ctx.bezierCurveTo(cx+270,cy+110,cx+250,cy+180,cx+190,cy+160);
+      ctx.stroke();
+      [-115,-45,25,95].forEach(lx=>{ ctx.beginPath(); ctx.moveTo(cx+lx,cy+140); ctx.lineTo(cx+lx-5,cy+230); ctx.lineTo(cx+lx+25,cy+230); ctx.lineTo(cx+lx+20,cy+140); ctx.stroke(); });
+    }},
+
+    dinossauro: { name:'Dinossauro', emoji:'🦕', theme:'fantasia', draw:(ctx,w,h)=>{
+      strokeSetup(ctx);
+      const cx=w/2, cy=h/2+60;
+      ctx.beginPath();
+      ctx.moveTo(cx-190, cy+40);
+      ctx.bezierCurveTo(cx-150, cy-40, cx-40, cy-50, cx+10, cy-30);
+      ctx.bezierCurveTo(cx+90, cy-100, cx+150, cy-90, cx+180, cy-130);
+      ctx.bezierCurveTo(cx+150, cy-60, cx+130, cy-20, cx+90, cy+10);
+      ctx.bezierCurveTo(cx+130, cy+20, cx+160, cy+70, cx+140, cy+140);
+      ctx.bezierCurveTo(cx+60, cy+150, cx-60, cy+150, cx-140, cy+120);
+      ctx.bezierCurveTo(cx-190, cy+110, cx-210, cy+70, cx-190, cy+40);
+      ctx.closePath(); ctx.stroke();
+      [[-70,-45],[-30,-75],[15,-55],[55,-70]].forEach(p=>{ ctx.beginPath(); ctx.moveTo(cx+p[0]-15,cy+p[1]+15); ctx.lineTo(cx+p[0],cy+p[1]-20); ctx.lineTo(cx+p[0]+15,cy+p[1]+15); ctx.stroke(); });
+      ctx.beginPath(); ctx.arc(cx+95, cy-35, 8, 0, Math.PI*2); ctx.stroke();
+      [-90,10].forEach(lx=>{ ctx.beginPath(); ctx.moveTo(cx+lx,cy+130); ctx.lineTo(cx+lx-15,cy+195); ctx.lineTo(cx+lx+25,cy+195); ctx.lineTo(cx+lx+20,cy+130); ctx.stroke(); });
+    }},
+
+    robo: { name:'Robô', emoji:'🤖', theme:'fantasia', draw:(ctx,w,h)=>{
+      strokeSetup(ctx);
+      const cx=w/2, cy=h/2;
+      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(cx-105,cy-210,210,140,20) : ctx.rect(cx-105,cy-210,210,140); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx,cy-210); ctx.lineTo(cx,cy-245); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx,cy-255,14,0,Math.PI*2); ctx.stroke();
+      [cx-50,cx+50].forEach(ex=>{ ctx.beginPath(); ctx.arc(ex, cy-140, 26, 0, Math.PI*2); ctx.stroke(); ctx.beginPath(); ctx.arc(ex, cy-140, 8, 0, Math.PI*2); ctx.fillStyle='#2a2a2a'; ctx.fill(); });
+      ctx.beginPath(); ctx.moveTo(cx-35,cy-80); ctx.lineTo(cx+35,cy-80); ctx.stroke();
+      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(cx-120,cy-55,240,170,24) : ctx.rect(cx-120,cy-55,240,170); ctx.stroke();
+      [cx-50,cx,cx+50].forEach(bx=>{ ctx.beginPath(); ctx.arc(bx, cy+30, 20, 0, Math.PI*2); ctx.stroke(); });
+      [cx-190,cx+190].forEach(ax=>{ ctx.beginPath(); ctx.roundRect ? ctx.roundRect(ax-30,cy-40,60,130,16) : ctx.rect(ax-30,cy-40,60,130); ctx.stroke(); });
+      [cx-70,cx+70].forEach(lx=>{ ctx.beginPath(); ctx.roundRect ? ctx.roundRect(lx-35,cy+115,70,90,14) : ctx.rect(lx-35,cy+115,70,90); ctx.stroke(); });
+    }},
+
+    castelo: { name:'Castelo', emoji:'🏰', theme:'fantasia', draw:(ctx,w,h)=>{
+      strokeSetup(ctx);
+      const cx=w/2, cy=h/2+90;
+      ctx.beginPath(); ctx.rect(cx-220, cy-90, 440, 190); ctx.stroke();
+      [cx-190,cx+150].forEach(tx=>{
+        ctx.beginPath(); ctx.rect(tx,cy-220,70,220); ctx.stroke();
+        for(let i=0;i<3;i++){ ctx.beginPath(); ctx.rect(tx+i*24,cy-235,16,15); ctx.stroke(); }
+      });
+      ctx.beginPath(); ctx.rect(cx-45, cy-170, 90, 170); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-55,cy-170); ctx.lineTo(cx,cy-230); ctx.lineTo(cx+55,cy-170); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx,cy-230); ctx.lineTo(cx,cy-260); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx,cy-260); ctx.lineTo(cx+35,cy-250); ctx.lineTo(cx,cy-240); ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cy+100, 40, Math.PI, 0); ctx.stroke();
+      [cx-190,cx-40,cx+120].forEach(wx=>{ ctx.beginPath(); ctx.arc(wx, cy-100, 16, 0, Math.PI*2); ctx.stroke(); });
+    }},
+
+    sorvete: { name:'Sorvete', emoji:'🍦', theme:'fantasia', draw:(ctx,w,h)=>{
+      strokeSetup(ctx);
+      const cx=w/2, cy=h/2-30;
+      ctx.beginPath(); ctx.arc(cx-55, cy-60, 90, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx+55, cy-60, 90, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cy-150, 90, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cy-215, 22, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(cx-95, cy+10); ctx.lineTo(cx+95, cy+10);
+      ctx.lineTo(cx, cy+260); ctx.closePath(); ctx.stroke();
+      for(let i=1;i<5;i++){ ctx.beginPath(); ctx.moveTo(cx-95+i*38, cy+10); ctx.lineTo(cx-20+i*8, cy+230); ctx.stroke(); }
+      for(let i=1;i<5;i++){ ctx.beginPath(); ctx.moveTo(cx-95,cy+10+i*35); ctx.lineTo(cx+95,cy+10+i*35); ctx.stroke(); }
+    }},
+
+    planeta: { name:'Planeta', emoji:'🪐', theme:'fantasia', draw:(ctx,w,h)=>{
+      strokeSetup(ctx);
+      const cx=w/2, cy=h/2;
+      ctx.beginPath(); ctx.arc(cx, cy, 120, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx-40,cy-30,20,0,Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx+35,cy+20,14,0,Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx-10,cy+50,10,0,Math.PI*2); ctx.stroke();
+      ctx.save();
+      ctx.translate(cx,cy); ctx.rotate(-0.35);
+      ctx.beginPath(); ctx.ellipse(0,0,240,55,0,0,Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(0,0,190,38,0,0,Math.PI*2); ctx.stroke();
+      ctx.restore();
+      [[cx-260,cy-180,8],[cx+250,cy-150,10],[cx-230,cy+190,7],[cx+270,cy+160,9],[cx+20,cy-230,8]].forEach(s=>{ starShape(ctx,s[0],s[1],s[2]); });
+    }},
   };
 
   function starShape(ctx,cx,cy,r,big){
@@ -618,6 +746,7 @@
     {id:'veiculos', name:'Veículos', emoji:'🚗'},
     {id:'natureza', name:'Natureza', emoji:'🌼'},
     {id:'formas', name:'Formas', emoji:'⭐'},
+    {id:'fantasia', name:'Fantasia', emoji:'🦄'},
   ];
   let currentThemeId = 'livre';
   let currentTemplateId = 'livre';
