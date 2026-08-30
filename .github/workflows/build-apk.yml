@@ -70,6 +70,7 @@ jobs:
             "maskableIconUrl": "https://rercoin73.github.io/corfer/icon-512-maskable.png",
             "webManifestUrl": "https://rercoin73.github.io/corfer/manifest.json",
             "fallbackType": "customtabs",
+            "enableNotifications": false,
             "appVersionName": "1.0.0",
             "appVersionCode": 1,
             "minSdkVersion": 21,
