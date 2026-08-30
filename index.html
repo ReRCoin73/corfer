@@ -724,6 +724,140 @@
       ctx.restore();
       [[cx-260,cy-180,8],[cx+250,cy-150,10],[cx-230,cy+190,7],[cx+270,cy+160,9],[cx+20,cy-230,8]].forEach(s=>{ starShape(ctx,s[0],s[1],s[2]); });
     }},
+
+    fazenda: { name:'Fazenda', emoji:'🐄', theme:'animais', draw:(ctx,w,h)=>{
+      strokeSetup(ctx);
+      const cx=w/2, gy=h/2+220;
+      ctx.beginPath(); ctx.moveTo(30,gy); ctx.lineTo(w-30,gy); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx-260, 130, 65, 0, Math.PI*2); ctx.stroke();
+      for(let i=0;i<8;i++){ const a=i*Math.PI/4; ctx.beginPath(); ctx.moveTo(cx-260+Math.cos(a)*80,130+Math.sin(a)*80); ctx.lineTo(cx-260+Math.cos(a)*110,130+Math.sin(a)*110); ctx.stroke(); }
+      [[70,gy-10],[210,gy-10],[350,gy-10],[490,gy-10],[630,gy-10]].forEach(p=>{
+        ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(p[0],p[1]-90); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(p[0]-40,p[1]-70); ctx.lineTo(p[0]+40,p[1]-70); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(p[0]-40,p[1]-35); ctx.lineTo(p[0]+40,p[1]-35); ctx.stroke();
+      });
+      const vx=cx-40, vy=gy-70;
+      ctx.beginPath(); ctx.ellipse(vx, vy, 90, 65, 0, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(vx-95, vy-20, 45, 0, Math.PI*2); ctx.stroke();
+      [[-40,-15,16],[10,10,20],[-10,35,14],[40,-5,18]].forEach(sp=>{ ctx.beginPath(); ctx.ellipse(vx+sp[0],vy+sp[1],sp[2],sp[2]*0.7,0,0,Math.PI*2); ctx.stroke(); });
+      ctx.beginPath(); ctx.arc(vx-125,vy-30,7,0,Math.PI*2); ctx.stroke();
+      [-30,30].forEach(dx=>{ ctx.beginPath(); ctx.moveTo(vx+dx,vy+55); ctx.lineTo(vx+dx,vy+90); ctx.stroke(); });
+      const cx2=cx+230, cy2=gy-50;
+      ctx.beginPath(); ctx.arc(cx2, cy2, 55, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx2, cy2-70, 35, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx2-20,cy2-95); ctx.lineTo(cx2-30,cy2-130); ctx.lineTo(cx2-5,cy2-100); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx2+15,cy2-95); ctx.lineTo(cx2+35,cy2-125); ctx.lineTo(cx2+22,cy2-90); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx2-35,cy2-60); ctx.quadraticCurveTo(cx2-55,cy2-40,cx2-45,cy2-20); ctx.stroke();
+      [-20,20].forEach(dx=>{ ctx.beginPath(); ctx.moveTo(cx2+dx,cy2+45); ctx.lineTo(cx2+dx,cy2+70); ctx.stroke(); });
+    }},
+
+    fundodomar: { name:'Fundo do Mar', emoji:'🐡', theme:'animais', draw:(ctx,w,h)=>{
+      strokeSetup(ctx);
+      const cx=w/2;
+      for(let i=0;i<3;i++){ ctx.beginPath(); ctx.moveTo(0,90+i*30); for(let x=0;x<=w;x+=80){ ctx.quadraticCurveTo(x+40,60+i*30,x+80,90+i*30); } ctx.stroke(); }
+      const fx=cx-180, fy=h/2-40;
+      ctx.beginPath(); ctx.ellipse(fx, fy, 110, 70, 0, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(fx+100,fy); ctx.lineTo(fx+180,fy-55); ctx.lineTo(fx+180,fy+55); ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(fx-65,fy-15,8,0,Math.PI*2); ctx.stroke();
+      const fx2=cx+180, fy2=h/2+120;
+      ctx.beginPath(); ctx.ellipse(fx2, fy2, 70, 45, 0, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(fx2-60,fy2); ctx.lineTo(fx2-110,fy2-35); ctx.lineTo(fx2-110,fy2+35); ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(fx2+45,fy2-10,6,0,Math.PI*2); ctx.stroke();
+      starShape(ctx, cx-40, h/2+220, 55);
+      [[cx+120,h-190],[cx+60,h-230],[cx+180,h-260]].forEach(m=>{ ctx.beginPath(); ctx.arc(m[0],m[1],9,0,Math.PI*2); ctx.stroke(); });
+      for(let i=0;i<3;i++){ const bx=cx-260+i*40, by=h-120-i*60; ctx.beginPath(); ctx.moveTo(bx,h-10); for(let k=0;k<4;k++){ ctx.quadraticCurveTo(bx-25,h-40-k*45,bx,h-70-k*45); } ctx.stroke(); }
+    }},
+
+    jardim: { name:'Jardim', emoji:'🌻', theme:'natureza', draw:(ctx,w,h)=>{
+      strokeSetup(ctx);
+      const gy=h-160;
+      ctx.beginPath(); ctx.moveTo(20,gy); ctx.lineTo(w-20,gy); ctx.stroke();
+      ctx.beginPath(); ctx.arc(w-140, 130, 70, 0, Math.PI*2); ctx.stroke();
+      for(let i=0;i<8;i++){ const a=i*Math.PI/4; ctx.beginPath(); ctx.moveTo(w-140+Math.cos(a)*90,130+Math.sin(a)*90); ctx.lineTo(w-140+Math.cos(a)*120,130+Math.sin(a)*120); ctx.stroke(); }
+      [[130,gy,'A'],[400,gy,'B'],[650,gy,'A']].forEach(f=>{
+        const fx=f[0], fy=f[1];
+        ctx.beginPath(); ctx.moveTo(fx,fy); ctx.lineTo(fx,fy-140); ctx.stroke();
+        const petals = f[2]==='A'?6:8, rad=f[2]==='A'?55:45;
+        for(let i=0;i<petals;i++){ const a=i*2*Math.PI/petals; ctx.beginPath(); ctx.ellipse(fx+Math.cos(a)*rad, fy-140+Math.sin(a)*rad, rad*0.7, rad*0.42, a, 0, Math.PI*2); ctx.stroke(); }
+        ctx.beginPath(); ctx.arc(fx, fy-140, rad*0.5, 0, Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(fx,fy-70); ctx.quadraticCurveTo(fx-40,fy-60,fx-55,fy-30); ctx.stroke();
+      });
+      const bx=280, by=gy-200;
+      ctx.beginPath(); ctx.ellipse(bx,by,26,18,0.3,0,Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(bx-15,by-8,20,14,-0.3,0,Math.PI*2); ctx.stroke();
+      const btx=520, bty=gy-170;
+      ctx.beginPath(); ctx.moveTo(btx,bty); ctx.quadraticCurveTo(btx+60,bty-70,btx+40,bty-10); ctx.quadraticCurveTo(btx+90,bty+10,btx,bty); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(btx,bty); ctx.quadraticCurveTo(btx-60,bty+70,btx-40,bty+10); ctx.quadraticCurveTo(btx-90,bty-10,btx,bty); ctx.stroke();
+    }},
+
+    floresta: { name:'Floresta', emoji:'🦉', theme:'natureza', draw:(ctx,w,h)=>{
+      strokeSetup(ctx);
+      const gy=h-140;
+      ctx.beginPath(); ctx.moveTo(10,gy); ctx.lineTo(w-10,gy); ctx.stroke();
+      ctx.beginPath(); ctx.arc(150,120,70,0,Math.PI*2); ctx.stroke();
+      [[150,gy],[610,gy]].forEach(t=>{
+        ctx.beginPath(); ctx.moveTo(t[0]-25,t[1]+140); ctx.lineTo(t[0]-16,t[1]); ctx.lineTo(t[0]+16,t[1]); ctx.lineTo(t[0]+25,t[1]+140); ctx.stroke();
+        ctx.beginPath(); ctx.arc(t[0]-55,t[1]-60,90,0,Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.arc(t[0]+55,t[1]-60,90,0,Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.arc(t[0],t[1]-150,95,0,Math.PI*2); ctx.stroke();
+      });
+      const ox=cxOf(w), oy=gy-260;
+      function cxOf(ww){return ww/2;}
+      ctx.beginPath(); ctx.moveTo(ox-70,gy); ctx.lineTo(ox-40,oy+120); ctx.lineTo(ox+40,oy+120); ctx.lineTo(ox+70,gy); ctx.stroke();
+      ctx.beginPath(); ctx.arc(ox, oy, 70, 0, Math.PI*2); ctx.stroke();
+      [[-25,-10],[25,-10]].forEach(e=>{ ctx.beginPath(); ctx.arc(ox+e[0],oy+e[1],22,0,Math.PI*2); ctx.stroke(); ctx.beginPath(); ctx.arc(ox+e[0],oy+e[1],8,0,Math.PI*2); ctx.fillStyle='#2a2a2a'; ctx.fill(); });
+      ctx.beginPath(); ctx.moveTo(ox,oy+15); ctx.lineTo(ox-8,oy+30); ctx.lineTo(ox+8,oy+30); ctx.closePath(); ctx.stroke();
+      [[-45,20],[45,20]].forEach(wingx=>{ ctx.beginPath(); ctx.ellipse(ox+wingx[0],oy+wingx[1],22,40,0,0,Math.PI*2); ctx.stroke(); });
+      [[390,gy-20],[440,gy-15]].forEach(mm=>{
+        ctx.beginPath(); ctx.moveTo(mm[0]-25,mm[1]); ctx.quadraticCurveTo(mm[0],mm[1]-70,mm[0]+25,mm[1]); ctx.closePath(); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(mm[0],mm[1]); ctx.lineTo(mm[0],mm[1]+35); ctx.stroke();
+      });
+    }},
+
+    cidade: { name:'Cidade', emoji:'🏙️', theme:'veiculos', draw:(ctx,w,h)=>{
+      strokeSetup(ctx);
+      const gy=h-190;
+      ctx.beginPath(); ctx.arc(120,110,60,0,Math.PI*2); ctx.stroke();
+      [[60,150,140],[240,90,210],[440,130,170],[620,70,230]].forEach(b=>{
+        ctx.beginPath(); ctx.rect(b[0],gy-b[2],110,b[2]); ctx.stroke();
+        const rows=Math.floor(b[2]/55);
+        for(let r=0;r<rows;r++){ for(let c=0;c<2;c++){ ctx.beginPath(); ctx.rect(b[0]+20+c*45,gy-b[2]+20+r*55,25,25); ctx.stroke(); } }
+      });
+      ctx.beginPath(); ctx.moveTo(0,gy); ctx.lineTo(w,gy); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0,gy+45); ctx.lineTo(w,gy+45); ctx.stroke();
+      for(let x=20;x<w;x+=90){ ctx.beginPath(); ctx.moveTo(x,gy+22); ctx.lineTo(x+45,gy+22); ctx.stroke(); }
+      const cx=cxc(w); function cxc(ww){return ww/2-40;}
+      const cy=gy+95;
+      ctx.beginPath();
+      ctx.moveTo(cx-140,cy+10); ctx.lineTo(cx-140,cy-25);
+      ctx.quadraticCurveTo(cx-140,cy-55,cx-105,cy-55);
+      ctx.lineTo(cx-40,cy-55); ctx.quadraticCurveTo(cx-5,cy-55,cx+15,cy-15);
+      ctx.lineTo(cx+95,cy-15); ctx.quadraticCurveTo(cx+130,cy-15,cx+130,cy+15);
+      ctx.lineTo(cx+130,cy+35); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-140,cy+35); ctx.lineTo(cx+130,cy+35); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-95,cy-55); ctx.lineTo(cx-70,cy-100); ctx.lineTo(cx-15,cy-100); ctx.lineTo(cx-5,cy-55); ctx.closePath(); ctx.stroke();
+      [cx-90,cx+70].forEach(wx=>{ ctx.beginPath(); ctx.arc(wx, cy+35, 33, 0, Math.PI*2); ctx.stroke(); });
+    }},
+
+    praia: { name:'Praia', emoji:'🏖️', theme:'natureza', draw:(ctx,w,h)=>{
+      strokeSetup(ctx);
+      const gy=h/2+80;
+      ctx.beginPath(); ctx.arc(w-150,120,65,0,Math.PI*2); ctx.stroke();
+      for(let i=0;i<10;i++){ const a=i*Math.PI/5; ctx.beginPath(); ctx.moveTo(w-150+Math.cos(a)*80,120+Math.sin(a)*80); ctx.lineTo(w-150+Math.cos(a)*110,120+Math.sin(a)*110); ctx.stroke(); }
+      for(let i=0;i<3;i++){ ctx.beginPath(); ctx.moveTo(0,gy+i*35); for(let x=0;x<=w;x+=70){ ctx.quadraticCurveTo(x+35,gy-15+i*35,x+70,gy+i*35); } ctx.stroke(); }
+      const sx=180, sy=gy+220;
+      ctx.beginPath(); ctx.moveTo(sx-70,sy); ctx.lineTo(sx-55,sy-70); ctx.lineTo(sx+55,sy-70); ctx.lineTo(sx+70,sy); ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.rect(sx-25,sy-120,50,50); ctx.stroke();
+      [-1,1].forEach(s=>{ ctx.beginPath(); ctx.moveTo(sx+s*55,sy-70); ctx.lineTo(sx+s*80,sy-140); ctx.lineTo(sx+s*35,sy-115); ctx.closePath(); ctx.stroke(); });
+      const ux=520, uy=gy+150;
+      ctx.beginPath(); ctx.moveTo(ux,uy); ctx.lineTo(ux,uy+120); ctx.stroke();
+      ctx.beginPath(); ctx.arc(ux,uy,100,Math.PI,0); ctx.stroke();
+      for(let i=1;i<4;i++){ ctx.beginPath(); ctx.moveTo(ux-100+i*50,uy); ctx.lineTo(ux-40+i*24,uy-60); ctx.stroke(); }
+      const crx=380, cry=gy+270;
+      ctx.beginPath(); ctx.ellipse(crx,cry,45,28,0,0,Math.PI*2); ctx.stroke();
+      [[-30,-25],[30,-25]].forEach(e=>{ ctx.beginPath(); ctx.moveTo(crx+e[0],cry+e[1]); ctx.lineTo(crx+e[0]-10,cry+e[1]-25); ctx.stroke(); ctx.beginPath(); ctx.arc(crx+e[0]-10,cry+e[1]-25,6,0,Math.PI*2); ctx.stroke(); });
+      [-1,1].forEach(s=>{ for(let i=0;i<3;i++){ ctx.beginPath(); ctx.moveTo(crx+s*40,cry-10+i*10); ctx.lineTo(crx+s*65,cry-15+i*10); ctx.stroke(); } });
+    }},
   };
 
   function starShape(ctx,cx,cy,r,big){
@@ -808,10 +942,12 @@
     bgCtx.fillRect(0,0,rect.width,rect.height);
     const tpl = templates[currentTemplateId];
     if(tpl && tpl.draw){
-      // scale to fit
-      const scale = Math.min(rect.width, rect.height)/VIEW;
-      bgCtx.translate((rect.width-VIEW*scale)/2, (rect.height-VIEW*scale)/2);
-      bgCtx.scale(scale,scale);
+      // scale to fit, with a zoom boost so drawings fill more of the frame
+      const ZOOM = 1.35;
+      const scale = (Math.min(rect.width, rect.height)/VIEW) * ZOOM;
+      bgCtx.translate(rect.width/2, rect.height/2);
+      bgCtx.scale(scale, scale);
+      bgCtx.translate(-VIEW/2, -VIEW/2);
       tpl.draw(bgCtx, VIEW, VIEW);
     }
     bgCtx.restore();
