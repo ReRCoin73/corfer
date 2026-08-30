@@ -21,6 +21,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
@@ -66,16 +69,12 @@ jobs:
           }
           EOF
 
-      - name: Install Android build tools (bubblewrap)
-        run: bubblewrap doctor || bubblewrap updateConfig --skipPwaValidation || true
-
       - name: Build APK
         env:
-          BUBBLEWRAP_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          BUBBLEWRAP_KEY_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          ANDROID_HOME: ${{ env.ANDROID_HOME }}
+          ANDROID_SDK_ROOT: ${{ env.ANDROID_HOME }}
         run: |
-          yes "" | bubblewrap build --skipPwaValidation || \
-          printf '%s\n' "${{ secrets.KEYSTORE_PASSWORD }}" "${{ secrets.KEYSTORE_PASSWORD }}" | bubblewrap build --skipPwaValidation
+          printf '%s\n%s\n' "${{ secrets.KEYSTORE_PASSWORD }}" "${{ secrets.KEYSTORE_PASSWORD }}" | bubblewrap build --skipPwaValidation
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
