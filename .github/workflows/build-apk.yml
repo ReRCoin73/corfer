@@ -80,12 +80,39 @@ jobs:
           }
           EOF
 
-      - name: Build APK
+      - name: Install expect
+        run: sudo apt-get update -y -q && sudo apt-get install -y -q expect
+
+      - name: Build APK (automated with expect)
         env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           ANDROID_HOME: ${{ env.ANDROID_HOME }}
           ANDROID_SDK_ROOT: ${{ env.ANDROID_HOME }}
         run: |
-          printf 'no\n%s\n%s\n' "${{ secrets.KEYSTORE_PASSWORD }}" "${{ secrets.KEYSTORE_PASSWORD }}" | bubblewrap build --skipPwaValidation
+          cat > build.exp << 'EOF'
+          #!/usr/bin/expect -f
+          set timeout 900
+          set password $env(KEYSTORE_PASSWORD)
+          spawn bubblewrap build --skipPwaValidation
+          expect {
+            -re "install the Android SDK" { send "no\r"; exp_continue }
+            -re "install the JDK" { send "no\r"; exp_continue }
+            -re "regenerate.*project" { send "no\r"; exp_continue }
+            -re "\\(Y/n\\)" { send "no\r"; exp_continue }
+            -re "\\(y/N\\)" { send "no\r"; exp_continue }
+            -re "Password for the Key Store" { send "$password\r"; exp_continue }
+            -re "Password for the Key" { send "$password\r"; exp_continue }
+            -re "Minifying" { exp_continue }
+            eof
+          }
+          catch wait result
+          exit [lindex $result 3]
+          EOF
+          chmod +x build.exp
+          expect -f build.exp
+
+      - name: List build output
+        run: find . -maxdepth 3 \( -name "*.apk" -o -name "*.aab" \) -print
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
