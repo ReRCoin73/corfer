@@ -97,11 +97,11 @@ jobs:
           expect {
             -re "install the Android SDK" { send "no\r"; exp_continue }
             -re "install the JDK" { send "no\r"; exp_continue }
-            -re "regenerate.*project" { send "no\r"; exp_continue }
-            -re "\\(Y/n\\)" { send "no\r"; exp_continue }
-            -re "\\(y/N\\)" { send "no\r"; exp_continue }
+            -re "regenerate.*project" { send "yes\r"; exp_continue }
             -re "Password for the Key Store" { send "$password\r"; exp_continue }
             -re "Password for the Key" { send "$password\r"; exp_continue }
+            -re "\\(Y/n\\)" { send "yes\r"; exp_continue }
+            -re "\\(y/N\\)" { send "no\r"; exp_continue }
             -re "Minifying" { exp_continue }
             eof
           }
