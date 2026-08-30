@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 <title>CorFer — Desenhar e Pintar</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 8C26 8 8 26 8 48c0 16 12 26 26 26 5 0 6-3 6-6 0-3-2-4-2-8 0-5 4-9 9-9h11c15 0 26-11 26-25C84 20 69 8 50 8z' fill='%23a06cf0'/%3E%3Ccircle cx='30' cy='38' r='7' fill='%23ff6b9d'/%3E%3Ccircle cx='50' cy='26' r='7' fill='%23ffcb3d'/%3E%3Ccircle cx='70' cy='38' r='7' fill='%233fb8d6'/%3E%3Ccircle cx='24' cy='58' r='6' fill='%237ed957'/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#a06cf0">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@600;800&display=swap');
 
@@ -725,6 +728,12 @@
   window.addEventListener('resize', resizeCanvases);
   renderGallery();
   resizeCanvases();
+
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', ()=>{
+      navigator.serviceWorker.register('service-worker.js').catch(()=>{});
+    });
+  }
 })();
 </script>
 </body>
