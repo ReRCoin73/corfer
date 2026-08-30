@@ -85,7 +85,7 @@ jobs:
           ANDROID_HOME: ${{ env.ANDROID_HOME }}
           ANDROID_SDK_ROOT: ${{ env.ANDROID_HOME }}
         run: |
-          printf '%s\n%s\n' "${{ secrets.KEYSTORE_PASSWORD }}" "${{ secrets.KEYSTORE_PASSWORD }}" | bubblewrap build --skipPwaValidation
+          printf 'no\n%s\n%s\n' "${{ secrets.KEYSTORE_PASSWORD }}" "${{ secrets.KEYSTORE_PASSWORD }}" | bubblewrap build --skipPwaValidation
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
